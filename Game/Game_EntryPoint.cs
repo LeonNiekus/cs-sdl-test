@@ -11,7 +11,8 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            exec();
+            var game = new TestGame(new API_Application());
+            exec(game.Application);
         }
     }
 }

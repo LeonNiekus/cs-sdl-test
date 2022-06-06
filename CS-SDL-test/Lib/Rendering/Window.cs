@@ -3,7 +3,7 @@ using SDL2;
 
 namespace CS_SDL_test.Lib.Rendering
 {
-    public class Window
+    internal class Window
     {
         private static Window _instance = null;
         private IntPtr _pWindow = IntPtr.Zero;
@@ -21,6 +21,11 @@ namespace CS_SDL_test.Lib.Rendering
 
         public IntPtr RawPointer { get => _pWindow; }
 
+        public void init_sdl(uint flags)
+        {
+            SDL.SDL_Init(flags);
+        }
+
         public void create_window(string? title, Rect rect, uint flags)
         {
             _pWindow = SDL.SDL_CreateWindow(title ?? "New Window", rect.x, rect.y, rect.w, rect.h, (SDL.SDL_WindowFlags)flags);
@@ -30,6 +35,7 @@ namespace CS_SDL_test.Lib.Rendering
         {
             SDL.SDL_DestroyWindow(_pWindow);
             _pWindow = IntPtr.Zero;
+            SDL.SDL_Quit();
         }
 
         public void delay(uint ms)

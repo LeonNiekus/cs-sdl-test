@@ -10,12 +10,11 @@ namespace API
 {
     public class EntryPoint
     {
-        static public void exec()
+        static public void exec(API_Application app)
         {
             try
             {
-                var a = true;
-                //var app = create_application();
+                app.run();
             }
             catch (Exception e)
             {

@@ -8,12 +8,15 @@
   </PropertyGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="XCOPY &quot;$(SolutionDir)..\API\bin\Debug\net5.0\API.dll&quot; &quot;$(OutDir)include\&quot; /Y&#xD;&#xA;XCOPY &quot;$(SolutionDir)..\CS-SDL-test\bin\Debug\net5.0\Lib.dll&quot; &quot;$(OutDir)include\&quot; /Y&#xD;&#xA;XCOPY &quot;$(SolutionDir)..\CS-SDL-test\post_build&quot; &quot;$(OutDir)include\&quot; /Y /S" />
+    <Exec Command="XCOPY &quot;$(SolutionDir)..\API\bin\Debug\net5.0\API.dll&quot; &quot;$(OutDir)&quot; /Y&#xD;&#xA;XCOPY &quot;$(SolutionDir)..\CS-SDL-test\bin\Debug\net5.0\Lib.dll&quot; &quot;$(OutDir)&quot; /Y&#xD;&#xA;XCOPY &quot;$(SolutionDir)..\CS-SDL-test\post_build&quot; &quot;$(OutDir)&quot; /Y /S" />
   </Target>
 
   <ItemGroup>
     <Reference Include="API">
-      <HintPath>bin\Debug\net5.0\include\API.dll</HintPath>
+      <HintPath>bin\Debug\net5.0\API.dll</HintPath>
+    </Reference>
+    <Reference Include="Lib">
+      <HintPath>bin\Debug\net5.0\Lib.dll</HintPath>
     </Reference>
   </ItemGroup>
 
