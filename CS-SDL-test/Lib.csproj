@@ -3,10 +3,22 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>CS_SDL_test</RootNamespace>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Lib\API\" />
+    <Folder Include="SDL2\" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="XCOPY &quot;$(SolutionDir)post_build&quot; &quot;$(SolutionDir)..\API\bin\Debug\net5.0&quot; /S /Y&#xD;&#xA;XCOPY &quot;$(OutDir)Lib.dll&quot; &quot;$(SolutionDir)..\API\bin\Debug\net5.0&quot; /Y" />
+  </Target>
 
 </Project>

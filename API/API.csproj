@@ -4,4 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="Lib">
+      <HintPath>bin\Debug\net5.0\Lib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
