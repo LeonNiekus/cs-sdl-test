@@ -50,6 +50,32 @@ namespace CS_SDL_test.Lib.Rendering
             SDL.SDL_RenderPresent(_pRenderer);
         }
 
+        public void render_image(string file_path, Rect dstrect)
+        {
+            IntPtr surface = SDL_image.IMG_Load(file_path);
+            IntPtr texture = SDL.SDL_CreateTextureFromSurface(_pRenderer, surface);
+            SDL.SDL_FreeSurface(surface);
+
+            uint sf;
+            int sa, sw, sh;
+            SDL.SDL_QueryTexture(texture, out sf, out sa, out sw, out sh);
+
+            SDL.SDL_Rect dst_rect;
+            dst_rect.x = dstrect.x;
+            dst_rect.y = dstrect.y;
+            dst_rect.w = sw;
+            dst_rect.h = sh;
+
+            // TODO: temp values
+            SDL.SDL_Rect src_rect;
+            src_rect.x = 0;
+            src_rect.y = 0;
+            src_rect.w = sw;
+            src_rect.h = sh;
+
+            SDL.SDL_RenderCopy(_pRenderer, texture, ref src_rect, ref dst_rect);
+        }
+
         public void render_rectangle(Rect rect)
         {
             SDL.SDL_Rect s_rect;

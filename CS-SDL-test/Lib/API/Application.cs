@@ -12,8 +12,6 @@ namespace CS_SDL_test.Lib.API
             _running = running;
             if (!_running) return;
 
-            Console.WriteLine("Application CTOR");
-
             Window window = Window.Instance;
             window.init_sdl(20);
             window.create_window("Super coole game", new Rect(250, 250, 500, 500), 0);
@@ -37,8 +35,9 @@ namespace CS_SDL_test.Lib.API
             Renderer renderer = Renderer.Instance;
 
             // Temporary values
-            renderer.set_render_draw_colour(new Colour(0, 255, 255));
-            renderer.render_rectangle(new Rect(50, 50, 100, 100));
+            //renderer.set_render_draw_colour(new Colour(0, 255, 255));
+            //renderer.render_rectangle(new Rect(50, 50, 100, 100));
+            renderer.render_image(".\\assets\\hamster.png", new Rect(0, 0, 0, 0));
             renderer.set_render_present();
 
             int i = 0;
