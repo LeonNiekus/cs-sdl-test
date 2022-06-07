@@ -13,7 +13,7 @@ namespace CS_SDL_test.Lib.API
             if (!_running) return;
 
             Window window = Window.Instance;
-            window.init_sdl(20);
+            window.init_sdl();
             window.create_window("Super coole game", new Rect(250, 250, 500, 500), 0);
 
             Renderer renderer = Renderer.Instance;

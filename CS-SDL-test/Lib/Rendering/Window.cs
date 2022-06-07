@@ -5,6 +5,7 @@ namespace CS_SDL_test.Lib.Rendering
 {
     internal class Window
     {
+        #region internal
         private static Window _instance = null;
         private IntPtr _pWindow = IntPtr.Zero;
 
@@ -21,8 +22,12 @@ namespace CS_SDL_test.Lib.Rendering
 
         public IntPtr RawPointer { get => _pWindow; }
 
-        public void init_sdl(uint flags)
+        public static uint Ticks { get => SDL.SDL_GetTicks(); }
+
+        public void init_sdl()
         {
+            uint flags = SDL.SDL_INIT_TIMER | SDL.SDL_INIT_AUDIO | SDL.SDL_INIT_VIDEO | SDL.SDL_INIT_EVENTS |
+                       SDL.SDL_INIT_JOYSTICK | SDL.SDL_INIT_HAPTIC | SDL.SDL_INIT_GAMECONTROLLER;
             SDL.SDL_Init(flags);
         }
 
@@ -42,5 +47,6 @@ namespace CS_SDL_test.Lib.Rendering
         {
             SDL.SDL_Delay(ms);
         }
+        #endregion
     }
 }

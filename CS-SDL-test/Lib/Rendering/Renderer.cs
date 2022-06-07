@@ -56,9 +56,8 @@ namespace CS_SDL_test.Lib.Rendering
             IntPtr texture = SDL.SDL_CreateTextureFromSurface(_pRenderer, surface);
             SDL.SDL_FreeSurface(surface);
 
-            uint sf;
-            int sa, sw, sh;
-            SDL.SDL_QueryTexture(texture, out sf, out sa, out sw, out sh);
+            int sw, sh;
+            SDL.SDL_QueryTexture(texture, out _, out _, out sw, out sh);
 
             SDL.SDL_Rect dst_rect;
             dst_rect.x = dstrect.x;
@@ -73,17 +72,41 @@ namespace CS_SDL_test.Lib.Rendering
             src_rect.w = sw;
             src_rect.h = sh;
 
-            SDL.SDL_RenderCopy(_pRenderer, texture, ref src_rect, ref dst_rect);
+            SDL.SDL_RenderCopy(_pRenderer, texture, ref src_rect, ref dst_rect); // TODO: change to RenderCopyEx
+            SDL.SDL_DestroyTexture(texture);
         }
 
-        public void render_rectangle(Rect rect)
+        public void render_rectangle_outline(Rect rect, Colour colour)
         {
-            SDL.SDL_Rect s_rect;
+            set_render_draw_colour(colour);
+            SDL.SDL_FRect s_rect;
             s_rect.x = rect.x;
             s_rect.y = rect.y;
             s_rect.w = rect.w;
             s_rect.h = rect.h;
-            SDL.SDL_RenderDrawRect(_pRenderer, ref s_rect);
+            SDL.SDL_RenderFillRectF(_pRenderer, ref s_rect);
+        }
+
+        public void render_rectangle(Rect rect, Colour colour)
+        {
+            set_render_draw_colour(colour);
+            SDL.SDL_FRect s_rect;
+            s_rect.x = rect.x;
+            s_rect.y = rect.y;
+            s_rect.w = rect.w;
+            s_rect.h = rect.h;
+            SDL.SDL_RenderDrawRectF(_pRenderer, ref s_rect);
+        }
+
+        public void render_point(Point point, Colour colour)
+        {
+            set_render_draw_colour(colour);
+            SDL.SDL_RenderDrawPointF(_pRenderer, point.x, point.y);
+        }
+
+        public void render_line()
+        {
+
         }
     }
 }

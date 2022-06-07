@@ -22,7 +22,7 @@ namespace API
 
                 if (!Directory.Exists(".\\logs")) Directory.CreateDirectory(".\\logs");
 
-                using (FileStream fs = File.Create(".\\logs\\crash-" + now.ToString()))
+                using (FileStream fs = System.IO.File.Create(".\\logs\\crash-" + now.ToString()))
                 {
                     byte[] errMsg = new UTF8Encoding(true).GetBytes(e.Message);
                     fs.Write(errMsg, 0, errMsg.Length);
