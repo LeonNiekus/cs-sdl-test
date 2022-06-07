@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace API
+namespace CS_SDL_test.Lib.API
 {
-    public class Component
+    public class View
     {
     }
 }

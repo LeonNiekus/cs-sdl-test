@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API
 {
-    public class AnimationHandler : Component
+    public class AnimationHandler
     {
     }
 }

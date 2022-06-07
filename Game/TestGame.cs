@@ -16,6 +16,7 @@ namespace Game
         public TestGame(API_Application app)
         {
             _application = app;
+            new HamsterView();
         }
     }
 }

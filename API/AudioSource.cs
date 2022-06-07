@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API
 {
-    public class AudioSource : Component
+    public class AudioSource
     {
     }
 }

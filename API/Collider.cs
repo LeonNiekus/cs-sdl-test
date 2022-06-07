@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API
 {
-    public class Collider : Component 
+    public class Collider
     {
     }
 }
