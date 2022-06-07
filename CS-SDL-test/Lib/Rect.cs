@@ -25,9 +25,19 @@ namespace CS_SDL_test.Lib
             return new Rect(a.x + b.x, a.y + b.y, a.w + b.w, a.h + b.h);
         }
 
+        public static Rect operator+(Rect a, int factor)
+        {
+            return new Rect(a.x + factor, a.y + factor, a.w + factor, a.h + factor);
+        }
+
         public static Rect operator-(Rect a, Rect b)
         {
             return new Rect(a.x - b.x, a.y - b.y, a.w - b.w, a.h - b.h);
+        }
+
+        public static Rect operator-(Rect a, int factor)
+        {
+            return new Rect(a.x - factor, a.y - factor, a.w - factor, a.h - factor);
         }
 
         public static Rect operator*(Rect a, Rect b)
@@ -35,9 +45,73 @@ namespace CS_SDL_test.Lib
             return new Rect(a.x * b.x, a.y * b.y, a.w * b.w, a.h * b.h);
         }
 
+        public static Rect operator*(Rect a, int factor)
+        {
+            return new Rect(a.x * factor, a.y * factor, a.w * factor, a.h * factor);
+        }
+
         public static Rect operator/(Rect a, Rect b)
         {
             return new Rect(a.x / b.x, a.y / b.y, a.w / b.w, a.h / b.h);
+        }
+
+        public static Rect operator/(Rect a, int factor)
+        {
+            return new Rect(a.x / factor, a.y / factor, a.w / factor, a.h / factor);
+        }
+
+        public int x2()
+        {
+            return x + w;
+        }
+
+        public int y2()
+        {
+            return y + h;
+        }
+
+        public void transform_x(int factor)
+        {
+            x += factor;
+        }
+
+        public void transform_y(int factor)
+        {
+            y += factor;
+        }
+
+        public void transform(int factor_x, int factor_y)
+        {
+            x += factor_x;
+            y += factor_y;
+        }
+
+        public void transform(int factor)
+        {
+            x += factor;
+            y += factor;
+        }
+
+        public void resize_w(int factor)
+        {
+            w += factor;
+        }
+
+        public void resize_h(int factor)
+        {
+            h += factor;
+        }
+
+        public void resize(int factor_w, int factor_h)
+        {
+            w += factor_w;
+            h += factor_h;
+        }
+
+        public void resize(int factor)
+        {
+            w += factor;
+            h += factor;
         }
     }
 }
