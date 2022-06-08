@@ -22,6 +22,8 @@ namespace CS_SDL_test.Lib.API
         {
             _active = true;
             _name = name;
+            _layer = 0;
+            _transform = new Point(0, 0);
         }
 
         public Entity(string name, string tag, int layer, Point transform)

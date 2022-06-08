@@ -33,7 +33,7 @@ namespace CS_SDL_test.Lib.Core
                     generate_event(_inputEvents.poll_events());
                 }
             }
-            catch (KeyNotFoundException)
+            catch (NoEventsFoundException)
             {
                 return;
             }          

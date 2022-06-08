@@ -14,5 +14,27 @@ namespace CS_SDL_test.Lib
         {
             this.x = x; this.y = y;
         }
+
+        public void transform_x(int factor)
+        {
+            x += factor;
+        }
+
+        public void transform_y(int factor)
+        {
+            y += factor;
+        }
+
+        public void transform(int factor_x, int factor_y)
+        {
+            x += factor_x;
+            y += factor_y;
+        }
+
+        public void transform(int factor)
+        {
+            x += factor;
+            y += factor;
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using CS_SDL_test.Lib.Core;
 using CS_SDL_test.Lib.Rendering;
-using SDL2;
 
 namespace CS_SDL_test.Lib.API
 {
@@ -62,8 +61,11 @@ namespace CS_SDL_test.Lib.API
                     {
                         if (component is Sprite sprite)
                         {
-                            renderer.render_image(sprite.FilePath, sprite.Position);
-                            sprite.Position = bounce(sprite.Position, ref factor_x, ref factor_y);
+                            renderer.render_image(sprite.FilePath, entity.Transform);
+                        }
+                        else if (component is Script script)
+                        {
+                            script.on_frame_tick();
                         }
                     }
                 }
@@ -71,19 +73,6 @@ namespace CS_SDL_test.Lib.API
                 renderer.set_render_present();
                 window.delay(10);
             }
-        }
-
-        // TODO: remove temp function!
-        private Rect bounce(Rect in_rect, ref int factor_x, ref int factor_y)
-        {
-            if (in_rect.x2() >= 1080) factor_x = -5;
-            else if (in_rect.x <= 0) factor_x = 5;
-
-            if (in_rect.y2() >= 720) factor_y = -5;
-            else if (in_rect.y <= 0) factor_y = 5;
-
-            in_rect.transform(factor_x, factor_y);
-            return in_rect;
         }
     }
 }

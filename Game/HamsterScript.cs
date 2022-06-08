@@ -1,17 +1,40 @@
-﻿using API;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CS_SDL_test.Lib;
+using CS_SDL_test.Lib.API;
 
 namespace Game
 {
     public class HamsterScript : Script
     {
-        public HamsterScript()
-        {
+        private int factor_x = 0, factor_y = 0, sprite_w, sprite_h;
 
+        public HamsterScript(int sprite_w, int sprite_h) : base() 
+        {
+            this.sprite_w = sprite_w;
+            this.sprite_h = sprite_h;
+        }
+
+        public override void on_create()
+        {
+            Console.WriteLine("HamsterScript created!");
+        }
+
+        public override void on_frame_tick()
+        {
+            Point parent_pos = Parent.Transform;
+
+            if (parent_pos.x + sprite_w >= 1080) factor_x = -5;
+            else if (parent_pos.x <= 0) factor_x = 5;
+
+            if (parent_pos.y + sprite_h >= 720) factor_y = -5;
+            else if (parent_pos.y <= 0) factor_y = 5;
+
+            parent_pos.transform(factor_x, factor_y);
+            Parent.Transform = parent_pos;
         }
     }
 }

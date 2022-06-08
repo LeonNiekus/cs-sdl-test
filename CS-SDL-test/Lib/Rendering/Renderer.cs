@@ -49,7 +49,7 @@ namespace CS_SDL_test.Lib.Rendering
             SDL.SDL_RenderPresent(_pRenderer);
         }
 
-        public void render_image(string file_path, Rect dstrect)
+        public void render_image(string file_path, Point position)
         {
             IntPtr surface = SDL_image.IMG_Load(file_path);
             IntPtr texture = SDL.SDL_CreateTextureFromSurface(_pRenderer, surface);
@@ -59,8 +59,8 @@ namespace CS_SDL_test.Lib.Rendering
             SDL.SDL_QueryTexture(texture, out _, out _, out sw, out sh);
 
             SDL.SDL_Rect dst_rect;
-            dst_rect.x = dstrect.x;
-            dst_rect.y = dstrect.y;
+            dst_rect.x = position.x;
+            dst_rect.y = position.y;
             dst_rect.w = sw;
             dst_rect.h = sh;
 

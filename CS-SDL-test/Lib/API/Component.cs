@@ -8,8 +8,19 @@ namespace CS_SDL_test.Lib.API
 {
     public class Component
     {
-        protected Entity _parent;
+        protected Entity _parent = null;
 
-        public Entity Parent { get => _parent; set => _parent = value; }
+        public Entity Parent 
+        { 
+            get => _parent; 
+            set 
+            { 
+                _parent = value;
+                parent_changed();
+            } 
+        }
+        public bool Active { get; set; }
+
+        protected virtual void parent_changed() { }
     }
 }

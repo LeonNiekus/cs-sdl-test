@@ -15,8 +15,9 @@ namespace Game
         {
             var hamster = Resources.create_entity("hamster");
             var sprite = new Sprite(".\\assets\\hamster.png", new Rect(400, 400));
-            var script = new HamsterScript();
             hamster.add_component(sprite);
+            var script = new HamsterScript(400, 400);
+            hamster.add_component(script);
         }
     }
 }
