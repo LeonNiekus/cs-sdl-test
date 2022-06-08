@@ -45,7 +45,6 @@ namespace CS_SDL_test.Lib.API
                 })
             );
 
-            int factor_x = 0, factor_y = 0;
             while (_running)
             {
                 EventManager.Instance.poll_and_handle_events();
