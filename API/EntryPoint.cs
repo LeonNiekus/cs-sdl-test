@@ -22,10 +22,12 @@ namespace API
 
                 if (!Directory.Exists(".\\logs")) Directory.CreateDirectory(".\\logs");
 
-                using (FileStream fs = System.IO.File.Create(".\\logs\\crash-" + now.ToString()))
+                using (FileStream fs = System.IO.File.Create(".\\logs\\crash-" + now.ToString().Replace(':', '_') + ".txt"))
                 {
                     byte[] errMsg = new UTF8Encoding(true).GetBytes(e.Message);
                     fs.Write(errMsg, 0, errMsg.Length);
+                    byte[] newline = Encoding.ASCII.GetBytes(Environment.NewLine);
+                    fs.Write(newline, 0, newline.Length);
                     byte[] errLog = new UTF8Encoding(true).GetBytes(e.StackTrace);
                     fs.Write(errLog, 0, errLog.Length);
                 }

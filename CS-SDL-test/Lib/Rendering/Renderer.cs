@@ -14,8 +14,7 @@ namespace CS_SDL_test.Lib.Rendering
         {
             get
             {
-                if (_instance == null) _instance = new Renderer();
-                return _instance;
+                return _instance ??= new Renderer();
             }
         }
 

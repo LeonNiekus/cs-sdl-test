@@ -1,5 +1,7 @@
 ﻿using System;
+using CS_SDL_test.Lib.Core;
 using CS_SDL_test.Lib.Rendering;
+using SDL2;
 
 namespace CS_SDL_test.Lib.API
 {
@@ -34,13 +36,23 @@ namespace CS_SDL_test.Lib.API
             Window window = Window.Instance;
             Renderer renderer = Renderer.Instance;
 
-            // Temporary values
-            //renderer.set_render_draw_colour(new Colour(0, 255, 255));
-            //renderer.render_rectangle(new Rect(50, 50, 100, 100));
-            //Rect dst_rect = new Rect(400, 400);
+            Input.init_listeners();
+
+            EventManager.Instance.register_event_handler(
+                EventType.WINDOW_CLOSE,
+                new Events.EventCallback((Events.Event _) => 
+                {
+                    _running = false;
+                })
+            );
+
             int factor_x = 0, factor_y = 0;
-            for (int i = 0; i < 9999; i++)
+            while (_running)
             {
+                EventManager.Instance.poll_and_handle_events();
+
+                if (Input.get_key_down(Input.KeyCode.ESCAPE)) _running = false;
+
                 renderer.set_render_draw_colour(Colour.black());
                 renderer.set_render_clear();
 
@@ -48,10 +60,10 @@ namespace CS_SDL_test.Lib.API
                 {
                     foreach (Component component in entity.Components)
                     {
-                        if (component is Sprite)
+                        if (component is Sprite sprite)
                         {
-                            renderer.render_image(((Sprite)component).FilePath, ((Sprite)component).Position);
-                            ((Sprite)component).Position = bounce(((Sprite)component).Position, ref factor_x, ref factor_y);
+                            renderer.render_image(sprite.FilePath, sprite.Position);
+                            sprite.Position = bounce(sprite.Position, ref factor_x, ref factor_y);
                         }
                     }
                 }
@@ -59,13 +71,6 @@ namespace CS_SDL_test.Lib.API
                 renderer.set_render_present();
                 window.delay(10);
             }
-
-            /* while (_running)
-            {
-                // do main loop stuff
-                window.delay(2000);
-                _running = false;
-            }*/
         }
 
         // TODO: remove temp function!

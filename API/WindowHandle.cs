@@ -14,8 +14,7 @@ namespace API
         {
             get
             {
-                if (_instance == null) _instance = new WindowHandle();
-                return _instance;
+                return _instance ??= new WindowHandle();
             }
         }
 
