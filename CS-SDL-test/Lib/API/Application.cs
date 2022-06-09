@@ -54,20 +54,28 @@ namespace CS_SDL_test.Lib.API
                 renderer.set_render_draw_colour(Colour.black());
                 renderer.set_render_clear();
 
-                foreach (Entity entity in Resources.get_all_entities())
+                if (ViewManager.CurrentView != null)
                 {
-                    foreach (Component component in entity.Components)
+                    ViewManager.CurrentView.on_update();
+
+                    foreach (Entity entity in ViewManager.CurrentView.Entities.get_active())
                     {
-                        if (component is Sprite sprite)
+                        foreach (Component component in entity.Components)
                         {
-                            renderer.render_image(sprite.FilePath, entity.Transform);
-                        }
-                        else if (component is Script script)
-                        {
-                            script.on_frame_tick();
+                            if (component is Script script)
+                            {
+                                script.on_frame_tick();
+                            }
                         }
                     }
+
+                    var cur_view = ViewManager.CurrentView;
+                    var active_camera = ViewManager.get_active_camera();
+
+                    cur_view.render_view(active_camera);
                 }
+
+
 
                 renderer.set_render_present();
                 window.delay(10);

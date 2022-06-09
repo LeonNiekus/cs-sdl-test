@@ -14,8 +14,8 @@ namespace CS_SDL_test.Lib.API
         protected int _layer;
         protected Point _transform;
         protected List<Component> _components = new();
-        protected Entity _parent;
-        protected View _belongsToScene;
+        protected Entity _parent = null;
+        protected View _view = null;
         protected List<Entity> _children = new();
 
         public Entity(string name)
@@ -41,6 +41,9 @@ namespace CS_SDL_test.Lib.API
         public int Layer { get => _layer; set => _layer = value; }
         public Point Transform { get => _transform; set => _transform = value; }
         public List<Component> Components { get => _components; }
+        public Entity Parent { get => _parent; set => _parent = value; }
+        public View View { get => _view; set => _view = value; }
+        public List<Entity> Children { get => _children; set => _children = value; }
 
         public static Entity find(string name)
         {
@@ -80,7 +83,6 @@ namespace CS_SDL_test.Lib.API
         public void set_active(bool flag)
         {
             _active = flag;
-            // TODO: do same for components
         }
 
         public void add_component(Component component)
@@ -89,6 +91,48 @@ namespace CS_SDL_test.Lib.API
 
             component.Parent = this;
             _components.Add(component);
+        }
+
+        public T get_component<T>() where T : Component
+        {
+            foreach (var component in _components) if (component is T t_comp) return t_comp;
+            return null;
+        }
+
+        public List<T> get_components<T>() where T : Component
+        {
+            List<T> result = new();
+            foreach (var component in _components) if (component is T t_comp) result.Add(t_comp);
+            return result;
+        }
+
+        private static List<Entity> get_from_resources()
+        {
+            return Resources.get_all_entities();
+        }
+
+        public static List<T> find_entities_of_type<T>(bool inc_inactive = false) where T : Entity
+        {
+            List<T> result = new();
+
+            foreach (var entity in get_from_resources())
+            {
+                if (!inc_inactive && !entity.Active) continue;
+                if (entity is T t_ent) result.Add(t_ent);
+            }
+
+            return result;
+        }
+
+        public static T find_entity_of_type<T>(bool inc_inactive = false) where T : Entity
+        {
+            foreach (var entity in get_from_resources())
+            {
+                if (!inc_inactive && !entity.Active) continue;
+                if (entity is T t_ent) return t_ent;
+            }
+
+            return null;
         }
     }
 }

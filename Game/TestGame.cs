@@ -1,4 +1,5 @@
 ﻿using API;
+using CS_SDL_test.Lib;
 using CS_SDL_test.Lib.API;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace Game
         public TestGame(API_Application app)
         {
             _application = app;
-            new HamsterView();
+            ViewManager.create_view<HamsterView>(new Rect(1200, 1200), "HamsterView");
         }
     }
 }
