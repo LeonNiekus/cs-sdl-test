@@ -22,9 +22,19 @@ namespace Game
         {
             var hamster = Resources.create_entity("hamster");
             hamster.set_active(true);
-            hamster.add_component(new Sprite(".\\assets\\hamster.png", new Rect(400, 400)));
+            var hamster_sprite = new Sprite(".\\assets\\hamster.png", new Rect(400, 400))
+            {
+                Layer = 2
+            };
+            hamster.add_component(hamster_sprite);
             hamster.add_component(new HamsterScript(400, 400));
             add_entity(hamster);
+
+            var sad_man = Resources.create_entity("sad_man", "sad", 1, new Point(300, 300));
+            sad_man.set_active(true);
+            sad_man.add_component(new Sprite(".\\assets\\sad.png", new Rect(200, 171)));
+            sad_man.add_component(new SadManScript(200, 171));
+            add_entity(sad_man);
         }
 
         public override void on_destroy()
