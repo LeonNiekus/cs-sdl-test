@@ -24,8 +24,6 @@ namespace Game
             hamster.set_active(true);
             hamster.add_component(new Sprite(".\\assets\\hamster.png", new Rect(400, 400)));
             hamster.add_component(new HamsterScript(400, 400));
-            hamster.get_component<Sprite>().Active = true;
-            hamster.get_component<HamsterScript>().Active = true;
             add_entity(hamster);
         }
 

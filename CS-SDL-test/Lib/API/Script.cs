@@ -16,7 +16,7 @@ namespace CS_SDL_test.Lib.API
         private Events.EventCallback _mouse_moved_callback;
         private Events.EventCallback _collision_callback;
 
-        public Script()
+        public Script() : base()
         {
             init_listeners();
         }

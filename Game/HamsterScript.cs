@@ -18,12 +18,36 @@ namespace Game
             this.sprite_h = sprite_h;
         }
 
+        public override void on_key_pressed(Events.KeyEvent e)
+        {
+            switch (e.key)
+            {
+                case Input.KeyCode.A:
+                    move_hamster(dx: -5);
+                    break;
+                case Input.KeyCode.D:
+                    move_hamster(dx: 5);
+                    break;
+                case Input.KeyCode.W:
+                    move_hamster(dy: -5);
+                    break;
+                case Input.KeyCode.S:
+                    move_hamster(dy: 5);
+                    break;
+            }
+        }
+
         public override void on_create()
         {
             Console.WriteLine("HamsterScript created!");
         }
 
         public override void on_frame_tick()
+        {
+            //bounce();
+        }
+
+        private void bounce()
         {
             Point parent_pos = Parent.Transform;
 
@@ -34,6 +58,13 @@ namespace Game
             else if (parent_pos.y <= 0) factor_y = 5;
 
             parent_pos.transform(factor_x, factor_y);
+            Parent.Transform = parent_pos;
+        }
+
+        private void move_hamster(int dx = 0, int dy = 0)
+        {
+            Point parent_pos = Parent.Transform;
+            parent_pos.transform(dx, dy);
             Parent.Transform = parent_pos;
         }
     }

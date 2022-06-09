@@ -10,6 +10,11 @@ namespace CS_SDL_test.Lib.API
     {
         protected Entity _parent = null;
 
+        public Component()
+        {
+            Active = true;
+        }
+
         public Entity Parent 
         { 
             get => _parent; 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CS_SDL_test.Lib.API
 {
-    public class View
+    public abstract class View
     {
         private string _name;
         private Rect _size;
@@ -31,13 +31,13 @@ namespace CS_SDL_test.Lib.API
         public Rect Size { get => _size; set => _size = value; }
         public EntityCollection Entities { get => _entities; }
 
-        public virtual void on_create() { }
-        public virtual void on_destroy() { }
-        public virtual void on_load() { }
-        public virtual void on_unload() { }
-        public virtual void on_activate() { }
-        public virtual void on_deactivate() { }
-        public virtual void on_update() { }
+        public abstract void on_create();
+        public abstract void on_destroy();
+        public abstract void on_load();
+        public abstract void on_unload();
+        public abstract void on_activate();
+        public abstract void on_deactivate();
+        public abstract void on_update();
 
         public void add_entity(Entity entity)
         {

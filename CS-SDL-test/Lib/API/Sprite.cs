@@ -12,14 +12,14 @@ namespace CS_SDL_test.Lib.API
         protected Rect _dimensions;
         protected int _layer;
 
-        public Sprite(string file_path, Rect dimensions)
+        public Sprite(string file_path, Rect dimensions) : base()
         {
             _file_path = file_path;
             _dimensions = dimensions;
             _layer = 0;
         }
 
-        public Sprite(string file_path, Rect dimensions, int layer)
+        public Sprite(string file_path, Rect dimensions, int layer) : base()
         {
             _file_path = file_path;
             _dimensions = dimensions;
