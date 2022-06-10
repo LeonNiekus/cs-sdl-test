@@ -82,7 +82,7 @@ namespace CS_SDL_test.Lib.API
             var renderer = Renderer.Instance;
             var sprites = entity.get_components<Sprite>();
 
-            foreach (var sprite in sprites) if (sprite.Active) renderer.render_image(sprite.FilePath, entity.Transform);
+            foreach (var sprite in sprites) if (sprite.Active) renderer.render_sprite(sprite, entity.Transform);
             foreach (var child in entity.Children) if (child.Active) draw_elements(child, camera);
         }
     }

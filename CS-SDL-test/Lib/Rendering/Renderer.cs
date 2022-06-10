@@ -1,4 +1,5 @@
 ﻿using System;
+using CS_SDL_test.Lib.API;
 using SDL2;
 
 namespace CS_SDL_test.Lib.Rendering
@@ -49,29 +50,36 @@ namespace CS_SDL_test.Lib.Rendering
             SDL.SDL_RenderPresent(_pRenderer);
         }
 
-        public void render_image(string file_path, Point position)
+        public void render_sprite(Sprite sprite, Point position)
         {
-            IntPtr surface = SDL_image.IMG_Load(file_path);
-            IntPtr texture = SDL.SDL_CreateTextureFromSurface(_pRenderer, surface);
-            SDL.SDL_FreeSurface(surface);
-
-            int sw, sh;
-            SDL.SDL_QueryTexture(texture, out _, out _, out sw, out sh);
-
             SDL.SDL_Rect dst_rect;
             dst_rect.x = position.x;
             dst_rect.y = position.y;
-            dst_rect.w = sw;
-            dst_rect.h = sh;
+            dst_rect.w = sprite.Dimensions.w;
+            dst_rect.h = sprite.Dimensions.h;
 
-            // TODO: temp values
+            SDL.SDL_Point point = new();
+            point.x = dst_rect.x + (dst_rect.w / 2);
+            point.y = dst_rect.y + (dst_rect.h / 2);
+
+            SDL.SDL_RendererFlip flip;
+
+            if (sprite.FlipX && !sprite.FlipY) flip = SDL.SDL_RendererFlip.SDL_FLIP_HORIZONTAL;
+            else if (!sprite.FlipX && sprite.FlipY) flip = SDL.SDL_RendererFlip.SDL_FLIP_VERTICAL;
+            else if (sprite.FlipX && sprite.FlipY) flip = SDL.SDL_RendererFlip.SDL_FLIP_HORIZONTAL | SDL.SDL_RendererFlip.SDL_FLIP_VERTICAL;
+            else flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE;
+
             SDL.SDL_Rect src_rect;
-            src_rect.x = 0;
-            src_rect.y = 0;
-            src_rect.w = sw;
-            src_rect.h = sh;
+            src_rect.x = sprite.Dimensions.x;
+            src_rect.y = sprite.Dimensions.y;
+            src_rect.w = sprite.Dimensions.w;
+            src_rect.h = sprite.Dimensions.h;
 
-            SDL.SDL_RenderCopy(_pRenderer, texture, ref src_rect, ref dst_rect); // TODO: change to RenderCopyEx
+            IntPtr surface = SDL_image.IMG_Load(sprite.FilePath);
+            IntPtr texture = SDL.SDL_CreateTextureFromSurface(_pRenderer, surface);
+            SDL.SDL_FreeSurface(surface);
+
+            SDL.SDL_RenderCopyEx(_pRenderer, texture, ref src_rect, ref dst_rect, sprite.Rotation, ref point, flip);
             SDL.SDL_DestroyTexture(texture);
         }
 

@@ -1,13 +1,14 @@
 ﻿using System;
 using CS_SDL_test.Lib.Core;
 using CS_SDL_test.Lib.Rendering;
+using SDL2;
 
 namespace CS_SDL_test.Lib.API
 {
     public class Application
     {
+        private const long FRAME_DELAY = 16;
         private bool _running;
-        private int _previous_frames = 0;
 
         public Application(bool running = true)
         {
@@ -35,6 +36,7 @@ namespace CS_SDL_test.Lib.API
         {
             Window window = Window.Instance;
             Renderer renderer = Renderer.Instance;
+            window.set_hint(SDL.SDL_HINT_RENDER_SCALE_QUALITY, "2");
 
             Input.init_listeners();
 
@@ -42,6 +44,7 @@ namespace CS_SDL_test.Lib.API
 
             uint total_frame_ticks = 0;
             uint total_frames = 0;
+            uint start_time = Window.Ticks;
 
             EventManager.Instance.register_event_handler(
                 EventType.WINDOW_CLOSE,
@@ -51,45 +54,44 @@ namespace CS_SDL_test.Lib.API
                 })
             );
 
+            long last_tick_time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+
             while (_running)
             {
-                Time.calculate_delta_time();
-                total_frames++;
+                ++total_frames;
                 uint start_ticks = Window.Ticks;
 
-                EventManager.Instance.poll_and_handle_events();
+                if (DateTimeOffset.Now.ToUnixTimeMilliseconds() > last_tick_time + FRAME_DELAY)
+                {
+                    EventManager.Instance.poll_and_handle_events();
+                    if (Input.get_key_down(Input.KeyCode.ESCAPE)) _running = false;
 
-                if (Input.get_key_down(Input.KeyCode.ESCAPE)) _running = false;
+                    if (ViewManager.CurrentView != null)
+                    {
+                        ViewManager.CurrentView.on_update();
+
+                        foreach (Entity entity in ViewManager.CurrentView.Entities.get_active())
+                        {
+                            foreach (Component component in entity.Components)
+                            {
+                                if (component is Script script)
+                                {
+                                    script.on_frame_tick();
+                                }
+                            }
+                        }
+                    }
+
+                    last_tick_time = DateTimeOffset.Now.ToUnixTimeMilliseconds() + FRAME_DELAY;
+                }
 
                 renderer.set_render_draw_colour(Colour.black());
                 renderer.set_render_clear();
 
                 if (ViewManager.CurrentView != null)
-                {
-                    ViewManager.CurrentView.on_update();
-
-                    foreach (Entity entity in ViewManager.CurrentView.Entities.get_active())
-                    {
-                        foreach (Component component in entity.Components)
-                        {
-                            if (component is Script script)
-                            {
-                                script.on_frame_tick();
-                            }
-                        }
-                    }
-
-                    var cur_view = ViewManager.CurrentView;
-                    var active_camera = ViewManager.get_active_camera();
-
-                    cur_view.render_view(active_camera);
-                }
+                    ViewManager.CurrentView.render_view(ViewManager.get_active_camera());
 
                 renderer.set_render_present();
-
-                uint cap_end_ticks = Window.Ticks;
-                float cap_time = cap_end_ticks - start_ticks;
-                if (cap_time < 16.666f) window.delay((uint)(16.666f - cap_time));
 
                 uint end_ticks = Window.Ticks;
                 float frame_time = (end_ticks - start_ticks) / 1000.0f;
@@ -97,11 +99,11 @@ namespace CS_SDL_test.Lib.API
 
                 Time.fps = 1.0f / frame_time;
                 Time.average_fps = 1000.0f / (total_frame_ticks / total_frames);
-                _previous_frames = (int)Time.fps;
 
                 // Temporary test prints
                 Console.Clear();
                 Console.WriteLine(Time.fps);
+                Console.WriteLine(Time.average_fps);
             }
         }
     }

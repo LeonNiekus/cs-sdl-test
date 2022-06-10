@@ -29,6 +29,11 @@ namespace CS_SDL_test.Lib.Rendering
             SDL.SDL_Init(flags);
         }
 
+        public void set_hint(string name, string value)
+        {
+            SDL.SDL_SetHint(name, value);
+        }
+
         public void create_window(string? title, Rect rect, uint flags)
         {
             _pWindow = SDL.SDL_CreateWindow(title ?? "New Window", rect.x, rect.y, rect.w, rect.h, (SDL.SDL_WindowFlags)flags);
