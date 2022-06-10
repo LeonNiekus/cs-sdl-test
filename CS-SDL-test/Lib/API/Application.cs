@@ -7,7 +7,7 @@ namespace CS_SDL_test.Lib.API
 {
     public class Application
     {
-        private const long FRAME_DELAY = 16;
+        public const long FRAME_DELAY = 16;
         private bool _running;
 
         public Application(bool running = true)
@@ -61,10 +61,10 @@ namespace CS_SDL_test.Lib.API
                 ++total_frames;
                 uint start_ticks = Window.Ticks;
 
+                // TODO: not all events are caught at all times it seems
                 if (DateTimeOffset.Now.ToUnixTimeMilliseconds() > last_tick_time + FRAME_DELAY)
                 {
                     EventManager.Instance.poll_and_handle_events();
-                    if (Input.get_key_down(Input.KeyCode.ESCAPE)) _running = false;
 
                     if (ViewManager.CurrentView != null)
                     {
@@ -74,7 +74,11 @@ namespace CS_SDL_test.Lib.API
                         {
                             foreach (Component component in entity.Components)
                             {
-                                if (component is Script script)
+                                if (component is PhysicsBody physics_body)
+                                {
+                                    physics_body.update_physics();
+                                }
+                                else if (component is Script script)
                                 {
                                     script.on_frame_tick();
                                 }
@@ -105,6 +109,11 @@ namespace CS_SDL_test.Lib.API
                 Console.WriteLine(Time.fps);
                 Console.WriteLine(Time.average_fps);
             }
+        }
+
+        public virtual void request_close()
+        {
+            _running = false;
         }
     }
 }

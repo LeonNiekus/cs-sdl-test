@@ -23,16 +23,19 @@ namespace Game
             switch (e.key)
             {
                 case Input.KeyCode.A:
-                    move_hamster(dx: -3);
+                    move_hamster(dx: -10);
                     break;
                 case Input.KeyCode.D:
-                    move_hamster(dx: 3);
+                    move_hamster(dx: 10);
                     break;
                 case Input.KeyCode.W:
                     move_hamster(dy: -3);
                     break;
                 case Input.KeyCode.S:
                     move_hamster(dy: 3);
+                    break;
+                case Input.KeyCode.ESCAPE:
+                    Game_EntryPoint.get_game().Application.request_close();
                     break;
             }
         }
@@ -63,9 +66,10 @@ namespace Game
 
         private void move_hamster(int dx = 0, int dy = 0)
         {
-            Point parent_pos = Parent.Transform;
-            parent_pos.transform(dx, dy);
-            Parent.Transform = parent_pos;
+            var phys_body = Parent.get_component<PhysicsBody>();
+
+            if (phys_body != null)
+                phys_body.add_force(new FloatContainer(dx, dy));
         }
     }
 }

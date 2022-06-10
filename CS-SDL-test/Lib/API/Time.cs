@@ -16,7 +16,7 @@ namespace CS_SDL_test.Lib.API
 
         public static void calculate_delta_time()
         {
-            delta_time = 1.0f / 60.0f; // TODO: maybe make max deltatime variable.
+            delta_time = 1.0f / (1000.0f / Application.FRAME_DELAY); 
         }
 
         public static double time_scale_default()

@@ -12,5 +12,10 @@ namespace API
         public API_Application() : base()
         {
         }
+
+        public override void request_close()
+        {
+            base.request_close();
+        }
     }
 }

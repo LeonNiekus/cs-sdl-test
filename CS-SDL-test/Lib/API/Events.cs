@@ -58,9 +58,14 @@ namespace CS_SDL_test.Lib.API
 
         public class CollisionEvent : Event 
         {
-            // TODO
+            public Collider collider;
+            public Collider other_collider;
 
-            public CollisionEvent(bool handled, EventType event_type) : base(handled, event_type) { }
+            public CollisionEvent(bool handled, EventType event_type, Collider collider1, Collider collider2) : base(handled, event_type) 
+            {
+                collider = collider1;
+                other_collider = collider2;
+            }
         }
 
         public class KeyEvent : Event

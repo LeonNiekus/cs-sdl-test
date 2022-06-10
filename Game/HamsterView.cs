@@ -27,6 +27,7 @@ namespace Game
                 Layer = 2
             };
             hamster.add_component(hamster_sprite);
+            hamster.add_component(new PhysicsBody(10, 2, true));
             hamster.add_component(new HamsterScript(400, 400));
             add_entity(hamster);
 
