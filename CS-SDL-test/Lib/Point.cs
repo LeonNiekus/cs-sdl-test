@@ -20,6 +20,11 @@ namespace CS_SDL_test.Lib
             return new Point(a.x + b.x, a.y + b.y);
         }
 
+        public static Point operator +(Point a, int factor)
+        {
+            return new Point(a.x + factor, a.y + factor);
+        }
+
         public static Point operator -(Point a, Point b)
         {
             return new Point(a.x - b.x, a.y - b.y);
@@ -33,6 +38,11 @@ namespace CS_SDL_test.Lib
         public static Point operator /(Point a, Point b)
         {
             return new Point(a.x / b.x, a.y / b.y);
+        }
+
+        public static Point operator /(Point a, int factor)
+        {
+            return new Point(a.x / factor, a.y / factor);
         }
 
         public void transform_x(int factor)

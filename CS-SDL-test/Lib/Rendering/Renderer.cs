@@ -111,9 +111,10 @@ namespace CS_SDL_test.Lib.Rendering
             SDL.SDL_RenderDrawPointF(_pRenderer, point.x, point.y);
         }
 
-        public void render_line()
+        public void render_line(Point position1, Point position2, Colour colour)
         {
-
+            set_render_draw_colour(colour);
+            SDL.SDL_RenderDrawLine(_pRenderer, position1.x, position1.y, position2.x, position2.y);
         }
     }
 }

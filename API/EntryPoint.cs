@@ -18,7 +18,12 @@ namespace API
             }
             catch (Exception e)
             {
-                DateTime now = DateTime.Now;
+                Debug.log_to_file(".\\logs", "crash-" + Debug.get_timestamp(), e.Message);
+                Debug.log_to_file(".\\logs", "crash-" + Debug.get_timestamp(), Environment.NewLine);
+                Debug.log_to_file(".\\logs", "crash-" + Debug.get_timestamp(), e.StackTrace);
+/*                DateTime now = DateTime.Now;
+
+                
 
                 if (!Directory.Exists(".\\logs")) Directory.CreateDirectory(".\\logs");
 
@@ -30,7 +35,7 @@ namespace API
                     fs.Write(newline, 0, newline.Length);
                     byte[] errLog = new UTF8Encoding(true).GetBytes(e.StackTrace);
                     fs.Write(errLog, 0, errLog.Length);
-                }
+                }*/
             }
         }
     }

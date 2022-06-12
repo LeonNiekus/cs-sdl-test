@@ -26,17 +26,12 @@ namespace CS_SDL_test.Lib.Core
 
         public void poll_and_handle_events()
         {
-            try
+            for (;;)
             {
-                for (;;)
-                {
-                    generate_event(_inputEvents.poll_events());
-                }
+                var ev = _inputEvents.poll_events();
+                if (ev == null) return;
+                generate_event(ev);
             }
-            catch (NoEventsFoundException)
-            {
-                return;
-            }          
         }
 
         public void generate_event(Events.Event ev)

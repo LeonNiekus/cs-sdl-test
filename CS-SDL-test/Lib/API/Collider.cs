@@ -32,7 +32,7 @@ namespace CS_SDL_test.Lib.API
         }
         public CollisionData CollisionData { get => _collision_data; }
 
-        public abstract FloatContainer resolve_collision(Collider coll1, Collider coll2, FloatContainer velocity, bool collision_occurred);
+        public abstract FloatContainer resolve_collision(Collider coll1, Collider coll2, FloatContainer velocity, ref bool collision_occurred);
 
         protected override void parent_changed()
         {

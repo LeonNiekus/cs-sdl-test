@@ -61,11 +61,10 @@ namespace CS_SDL_test.Lib.API
                 ++total_frames;
                 uint start_ticks = Window.Ticks;
 
-                // TODO: not all events are caught at all times it seems
+                EventManager.Instance.poll_and_handle_events();
+
                 if (DateTimeOffset.Now.ToUnixTimeMilliseconds() > last_tick_time + FRAME_DELAY)
                 {
-                    EventManager.Instance.poll_and_handle_events();
-
                     if (ViewManager.CurrentView != null)
                     {
                         ViewManager.CurrentView.on_update();
@@ -103,11 +102,6 @@ namespace CS_SDL_test.Lib.API
 
                 Time.fps = 1.0f / frame_time;
                 Time.average_fps = 1000.0f / (total_frame_ticks / total_frames);
-
-                // Temporary test prints
-                Console.Clear();
-                Console.WriteLine(Time.fps);
-                Console.WriteLine(Time.average_fps);
             }
         }
 

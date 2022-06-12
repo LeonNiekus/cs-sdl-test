@@ -63,7 +63,7 @@ namespace CS_SDL_test.Lib.Core
 
                 return new Events.Event(false, EventType.NONE);
             }
-            throw new NoEventsFoundException("No more events in queue");
+            return null;
         }
 
         public static bool get_key_state(Input.KeyCode key)

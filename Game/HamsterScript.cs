@@ -42,7 +42,8 @@ namespace Game
 
         public override void on_create()
         {
-            Console.WriteLine("HamsterScript created!");
+            Debug.log("HamsterScript created!");
+            Debug.log_error(new Point(1, 1).x);
         }
 
         public override void on_frame_tick()

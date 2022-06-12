@@ -20,6 +20,41 @@ namespace CS_SDL_test.Lib.API
         {
             return new FloatContainer(a.a + b.a, a.b + b.b);
         }
+
+        public static FloatContainer operator -(FloatContainer a, FloatContainer b)
+        {
+            return new FloatContainer(a.a - b.a, a.b - b.b);
+        }
+
+        public static FloatContainer operator *(FloatContainer a, FloatContainer b)
+        {
+            return new FloatContainer(a.a * b.a, a.b * b.b);
+        }
+
+        public static FloatContainer operator *(FloatContainer a, float factor)
+        {
+            return new FloatContainer(a.a * factor, a.b * factor);
+        }
+
+        public static FloatContainer operator /(FloatContainer a, float factor)
+        {
+            return new FloatContainer(a.a / factor, a.b / factor);
+        }
+
+        public static bool operator ==(FloatContainer a, FloatContainer b)
+        {
+            return a.a == b.a && a.b == b.b;
+        }
+
+        public static bool operator !=(FloatContainer a, FloatContainer b)
+        {
+            return a.a != b.a || a.b != b.b;
+        }
+
+        public float mag()
+        {
+            return (float)Math.Sqrt(a * a + b * b);
+        }
     }
 
     public class PhysicsBody : Component
@@ -61,7 +96,7 @@ namespace CS_SDL_test.Lib.API
 
             bool collision_occurred = false;
             if (_velocity.a != 0 || _velocity.b != 0)
-                _velocity = collider1.resolve_collision(collider1, collider2, _velocity, collision_occurred);
+                _velocity = collider1.resolve_collision(collider1, collider2, _velocity, ref collision_occurred);
 
             if (collision_occurred)
             {
