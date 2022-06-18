@@ -5,7 +5,7 @@ using SDL2;
 
 namespace CS_SDL_test.Lib.API
 {
-    public class Application
+    internal class Application
     {
         public const long FRAME_DELAY = 16;
         private bool _running;

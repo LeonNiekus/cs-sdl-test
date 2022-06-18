@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CS_SDL_test.Lib.Core
 {
-    public class EventManager
+    internal class EventManager
     {
         private static EventManager _instance = null;
         private InputEvents _inputEvents = null;

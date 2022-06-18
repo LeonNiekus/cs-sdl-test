@@ -27,13 +27,17 @@ namespace Game
                 Layer = 2
             };
             hamster.add_component(hamster_sprite);
-            hamster.add_component(new PhysicsBody(10, 2, true));
+            hamster.add_component(new PhysicsBody(4, 2, true));
             hamster.add_component(new HamsterScript(400, 400));
             add_entity(hamster);
 
-            var sad_man = Resources.create_entity("sad_man", "sad", 1, new Point(300, 300));
+            var sad_man = Resources.create_entity("sad_man", "sad", 1, new Point3D(300, 300));
             sad_man.set_active(true);
-            sad_man.add_component(new Sprite(".\\assets\\sad.png", new Rect(200, 171)));
+            var sad_man_sprite = new Sprite(".\\assets\\sad.png", new Rect(200, 171))
+            {
+                Layer = 3
+            };
+            sad_man.add_component(sad_man_sprite);
             sad_man.add_component(new SadManScript(200, 171));
             add_entity(sad_man);
         }

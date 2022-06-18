@@ -6,43 +6,48 @@ using System.Threading.Tasks;
 
 namespace CS_SDL_test.Lib
 {
-    public struct Point
+    public struct Point3D
     {
-        public int x, y;
+        public int x, y, z;
 
-        public Point(int x, int y)
+        public Point3D(int x, int y, int z)
         {
-            this.x = x; this.y = y;
+            this.x = x; this.y = y; this.z = z;
         }
 
-        public static Point operator +(Point a, Point b)
+        public Point3D(int x, int y)
         {
-            return new Point(a.x + b.x, a.y + b.y);
+            this.x = x; this.y = y; z = 0;
         }
 
-        public static Point operator +(Point a, int factor)
+        public static Point3D operator +(Point3D a, Point3D b)
         {
-            return new Point(a.x + factor, a.y + factor);
+            return new Point3D(a.x + b.x, a.y + b.y, a.z + b.z);
         }
 
-        public static Point operator -(Point a, Point b)
+        public static Point3D operator +(Point3D a, int factor)
         {
-            return new Point(a.x - b.x, a.y - b.y);
+            return new Point3D(a.x + factor, a.y + factor, a.z + factor);
         }
 
-        public static Point operator *(Point a, Point b)
+        public static Point3D operator -(Point3D a, Point3D b)
         {
-            return new Point(a.x * b.x, a.y * b.y);
+            return new Point3D(a.x - b.x, a.y - b.y, a.z + b.z);
         }
 
-        public static Point operator /(Point a, Point b)
+        public static Point3D operator *(Point3D a, Point3D b)
         {
-            return new Point(a.x / b.x, a.y / b.y);
+            return new Point3D(a.x * b.x, a.y * b.y, a.z * b.z);
         }
 
-        public static Point operator /(Point a, int factor)
+        public static Point3D operator /(Point3D a, Point3D b)
         {
-            return new Point(a.x / factor, a.y / factor);
+            return new Point3D(a.x / b.x, a.y / b.y, a.z / b.z);
+        }
+
+        public static Point3D operator /(Point3D a, int factor)
+        {
+            return new Point3D(a.x / factor, a.y / factor, a.z / factor);
         }
 
         public void transform_x(int factor)
@@ -55,16 +60,23 @@ namespace CS_SDL_test.Lib
             y += factor;
         }
 
-        public void transform(int factor_x, int factor_y)
+        public void transform_z(int factor)
+        {
+            z += factor;
+        }
+
+        public void transform(int factor_x, int factor_y, int factor_z)
         {
             x += factor_x;
             y += factor_y;
+            z += factor_z;
         }
 
         public void transform(int factor)
         {
             x += factor;
             y += factor;
+            z += factor;
         }
     }
 }

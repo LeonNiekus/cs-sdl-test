@@ -348,7 +348,7 @@ namespace CS_SDL_test.Lib.API
             return false;
         }
 
-        public static Point mouse_position()
+        public static Point3D mouse_position()
         {
             return InputEvents.mouse_position();
         }

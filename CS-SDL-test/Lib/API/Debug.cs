@@ -25,10 +25,10 @@ namespace CS_SDL_test.Lib.API
 
         public struct Line
         {
-            public Point start, end;
+            public Point3D start, end;
             public Colour colour;
 
-            public Line(Point start, Point end, Colour colour)
+            public Line(Point3D start, Point3D end, Colour colour)
             {
                 this.start = start;
                 this.end = end;
@@ -54,7 +54,7 @@ namespace CS_SDL_test.Lib.API
             Console.WriteLine(result);
         }
 
-        public static void set_line(Point start, Point end, Colour colour)
+        public static void set_line(Point3D start, Point3D end, Colour colour)
         {
             _lines.Add(new(start, end, colour));
         }

@@ -12,7 +12,7 @@ namespace CS_SDL_test.Lib.API
         protected string _tag;
         protected bool _active;
         protected int _layer;
-        protected Point _transform;
+        protected Point3D _transform;
         protected List<Component> _components = new();
         protected Entity _parent = null;
         protected View _view = null;
@@ -23,10 +23,10 @@ namespace CS_SDL_test.Lib.API
             _active = true;
             _name = name;
             _layer = 0;
-            _transform = new Point(0, 0);
+            _transform = new Point3D(0, 0);
         }
 
-        public Entity(string name, string tag, int layer, Point transform)
+        public Entity(string name, string tag, int layer, Point3D transform)
         {
             _active = true;
             _name = name;
@@ -39,7 +39,7 @@ namespace CS_SDL_test.Lib.API
         public string Tag { get => _tag; set => _tag = value; }
         public bool Active { get => _active; }
         public int Layer { get => _layer; set => _layer = value; }
-        public Point Transform { get => _transform; set => _transform = value; }
+        public Point3D Transform { get => _transform; set => _transform = value; }
         public List<Component> Components { get => _components; }
         public Entity Parent { get => _parent; set => _parent = value; }
         public View View { get => _view; set => _view = value; }

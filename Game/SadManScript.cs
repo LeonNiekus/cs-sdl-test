@@ -25,7 +25,7 @@ namespace Game
 
         private void bounce()
         {
-            Point parent_pos = Parent.Transform;
+            Point3D parent_pos = Parent.Transform;
 
             if (parent_pos.x + sprite_w >= 1080) factor_x = -5;
             else if (parent_pos.x <= 0) factor_x = 5;
@@ -33,7 +33,7 @@ namespace Game
             if (parent_pos.y + sprite_h >= 720) factor_y = -5;
             else if (parent_pos.y <= 0) factor_y = 5;
 
-            parent_pos.transform(factor_x, factor_y);
+            parent_pos.transform(factor_x, factor_y, 0);
             Parent.Transform = parent_pos;
         }
     }

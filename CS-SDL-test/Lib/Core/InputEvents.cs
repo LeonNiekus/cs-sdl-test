@@ -9,13 +9,13 @@ using System.Runtime.InteropServices;
 
 namespace CS_SDL_test.Lib.Core
 {
-    public class InputEvents
+    internal class InputEvents
     {
         public InputEvents() { }
 
         private static bool get_mouse_state(ref int x, ref int y, Input.MouseButton button = Input.MouseButton.LEFT)
         {
-            Point position = new();
+            Point3D position = new();
             SDL.SDL_PumpEvents();
 
             var state = SDL.SDL_GetMouseState(out position.x, out position.y);
@@ -45,17 +45,17 @@ namespace CS_SDL_test.Lib.Core
 
                     case SDL.SDL_EventType.SDL_MOUSEBUTTONDOWN:
                         if (ev.button.button > SDL.SDL_BUTTON_RIGHT) break;
-                        return new Events.MouseEvent(false, EventType.MOUSE_BUTTON_PRESSED, new Point(ev.button.x, ev.button.y), (Input.MouseButton)ev.button.button, true);
+                        return new Events.MouseEvent(false, EventType.MOUSE_BUTTON_PRESSED, new Point3D(ev.button.x, ev.button.y), (Input.MouseButton)ev.button.button, true);
 
                     case SDL.SDL_EventType.SDL_MOUSEBUTTONUP:
                         if (ev.button.button > SDL.SDL_BUTTON_RIGHT) break;
-                        return new Events.MouseEvent(false, EventType.MOUSE_BUTTON_RELEASED, new Point(ev.button.x, ev.button.y), (Input.MouseButton)ev.button.button, false);
+                        return new Events.MouseEvent(false, EventType.MOUSE_BUTTON_RELEASED, new Point3D(ev.button.x, ev.button.y), (Input.MouseButton)ev.button.button, false);
 
                     case SDL.SDL_EventType.SDL_MOUSEMOTION:
-                        return new Events.MouseEvent(false, EventType.MOUSE_MOVED, new Point(ev.button.x, ev.button.y), (Input.MouseButton)ev.button.button, false);
+                        return new Events.MouseEvent(false, EventType.MOUSE_MOVED, new Point3D(ev.button.x, ev.button.y), (Input.MouseButton)ev.button.button, false);
 
                     case SDL.SDL_EventType.SDL_MOUSEWHEEL:
-                        return new Events.MouseEvent(false, EventType.MOUSE_SCROLLED, new Point(ev.button.x, ev.button.y), (Input.MouseButton)ev.button.button, false);
+                        return new Events.MouseEvent(false, EventType.MOUSE_SCROLLED, new Point3D(ev.button.x, ev.button.y), (Input.MouseButton)ev.button.button, false);
 
                     default:
                         break;
@@ -85,9 +85,9 @@ namespace CS_SDL_test.Lib.Core
             return get_mouse_state(ref _, ref _, button);
         }
 
-        public static Point mouse_position()
+        public static Point3D mouse_position()
         {
-            Point pos = new();
+            Point3D pos = new();
             get_mouse_state(ref pos.x, ref pos.y);
             return pos;
         }

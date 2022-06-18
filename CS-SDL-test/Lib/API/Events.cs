@@ -44,11 +44,11 @@ namespace CS_SDL_test.Lib.API
 
         public class MouseEvent : Event
         {
-            public Point position;
+            public Point3D position;
             public Input.MouseButton button;
             public bool is_pressed;
 
-            public MouseEvent(bool handled, EventType event_type, Point position, Input.MouseButton button, bool is_pressed) : base(handled, event_type)
+            public MouseEvent(bool handled, EventType event_type, Point3D position, Input.MouseButton button, bool is_pressed) : base(handled, event_type)
             {
                 this.position = position;
                 this.button = button;

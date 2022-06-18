@@ -50,7 +50,7 @@ namespace CS_SDL_test.Lib.Rendering
             SDL.SDL_RenderPresent(_pRenderer);
         }
 
-        public void render_sprite(Sprite sprite, Point position)
+        public void render_sprite(Sprite sprite, Point3D position)
         {
             SDL.SDL_Rect dst_rect;
             dst_rect.x = position.x;
@@ -105,13 +105,13 @@ namespace CS_SDL_test.Lib.Rendering
             SDL.SDL_RenderDrawRectF(_pRenderer, ref s_rect);
         }
 
-        public void render_point(Point point, Colour colour)
+        public void render_point(Point3D point, Colour colour)
         {
             set_render_draw_colour(colour);
             SDL.SDL_RenderDrawPointF(_pRenderer, point.x, point.y);
         }
 
-        public void render_line(Point position1, Point position2, Colour colour)
+        public void render_line(Point3D position1, Point3D position2, Colour colour)
         {
             set_render_draw_colour(colour);
             SDL.SDL_RenderDrawLine(_pRenderer, position1.x, position1.y, position2.x, position2.y);

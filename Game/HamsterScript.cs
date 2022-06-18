@@ -23,10 +23,10 @@ namespace Game
             switch (e.key)
             {
                 case Input.KeyCode.A:
-                    move_hamster(dx: -10);
+                    move_hamster(dx: -100);
                     break;
                 case Input.KeyCode.D:
-                    move_hamster(dx: 10);
+                    move_hamster(dx: 100);
                     break;
                 case Input.KeyCode.W:
                     move_hamster(dy: -3);
@@ -43,7 +43,7 @@ namespace Game
         public override void on_create()
         {
             Debug.log("HamsterScript created!");
-            Debug.log_error(new Point(1, 1).x);
+            Debug.log_error(new Point3D(1, 1).x);
         }
 
         public override void on_frame_tick()
@@ -53,7 +53,7 @@ namespace Game
 
         private void bounce()
         {
-            Point parent_pos = Parent.Transform;
+            Point3D parent_pos = Parent.Transform;
 
             if (parent_pos.x + sprite_w >= 1080) factor_x = -1;
             else if (parent_pos.x <= 0) factor_x = 1;
@@ -61,7 +61,7 @@ namespace Game
             if (parent_pos.y + sprite_h >= 720) factor_y = -1;
             else if (parent_pos.y <= 0) factor_y = 1;
 
-            parent_pos.transform(factor_x, factor_y);
+            parent_pos.transform(factor_x, factor_y, 0);
             Parent.Transform = parent_pos;
         }
 

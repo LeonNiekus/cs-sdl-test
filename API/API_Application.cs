@@ -7,15 +7,18 @@ using System.Threading.Tasks;
 
 namespace API
 {
-    public class API_Application : Application
+    public class API_Application
     {
-        public API_Application() : base()
+        internal Application _app;
+
+        public API_Application()
         {
+            _app = new Application();
         }
 
-        public override void request_close()
+        public void request_close()
         {
-            base.request_close();
+            _app.request_close();
         }
     }
 }

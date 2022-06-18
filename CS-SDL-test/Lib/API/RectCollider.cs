@@ -8,7 +8,7 @@ namespace CS_SDL_test.Lib.API
 {
     public class RectCollider : Collider
     {
-        public RectCollider(List<int> collide_layers, Point offset) : base(collide_layers, offset)
+        public RectCollider(List<int> collide_layers, Point3D offset) : base(collide_layers, offset)
         {
 
         }

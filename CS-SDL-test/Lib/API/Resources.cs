@@ -34,7 +34,7 @@ namespace CS_SDL_test.Lib.API
             return camera;
         }
 
-        public static Entity create_entity(string name, string tag, int layer, Point transform)
+        public static Entity create_entity(string name, string tag, int layer, Point3D transform)
         {
             Entity entity = new(name, tag, layer, transform);
             add_entity(entity);

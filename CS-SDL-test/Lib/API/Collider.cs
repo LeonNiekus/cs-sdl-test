@@ -9,21 +9,19 @@ namespace CS_SDL_test.Lib.API
 {
     public abstract class Collider : Component
     {
-        public const double PI = 3.141592653589793238462643383279502884197169399375105820974944592307816406286;
-
-        protected Point _offset;
+        protected Point3D _offset;
         protected List<int> _collide_layers;
         protected CollisionData _collision_data;
 
-        public Collider(List<int> collide_layers, Point offset)
+        public Collider(List<int> collide_layers, Point3D offset)
         {
             _offset = offset;
             _collide_layers = collide_layers;
         }
 
         public List<int> CollideLayers { get => _collide_layers; }
-        public Point Offset { get => _offset; }
-        public Point Position 
+        public Point3D Offset { get => _offset; }
+        public Point3D Position 
         { 
             get 
             {

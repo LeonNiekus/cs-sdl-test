@@ -61,21 +61,25 @@ namespace CS_SDL_test.Lib.API
     {
         private bool _enable_gravity;
         private float _gravity_scale;
+        private float _mass;
         private FloatContainer _velocity;
+        private FloatContainer _acceleration;
         private float _jump_height;
         private float _time_to_jump_apex;
         private float _x_friction;
         private float _jump_velocity;
 
-        public PhysicsBody(float jump_height, float time_to_jump_apex, bool enable_gravity)
+        public PhysicsBody(float jump_height, float time_to_jump_apex, bool enable_gravity, float mass = 1.0f, float x_friction = 2.0f)
         {
             _jump_height = jump_height;
             _time_to_jump_apex = time_to_jump_apex;
             _enable_gravity = enable_gravity;
-            _x_friction = 2.0f;
+            _mass = mass;
+            _x_friction = x_friction;
         }
 
         public FloatContainer Velocity { get => _velocity; set => _velocity = value; }
+        public float Mass { get => _mass; set => _mass = value; }
         public float JumpHeight { get => _jump_height; }
         public float TimeToJumpApex { get => _time_to_jump_apex; }
         public float JumpVelocity { get => _jump_velocity + _gravity_scale; }
@@ -134,7 +138,7 @@ namespace CS_SDL_test.Lib.API
                     }
                 }
 
-                Parent.Transform = Parent.Transform + new Point((int)(_velocity.a * time_scale), (int)(_velocity.b * time_scale));
+                Parent.Transform = Parent.Transform + new Point3D((int)(_velocity.a * time_scale), (int)(_velocity.b * time_scale));
             }
         }
     }
