@@ -9,17 +9,22 @@ namespace CS_SDL_test.Lib.API
     {
         public const long FRAME_DELAY = 16;
         private bool _running;
+        private bool _is_3d;
 
-        public Application(bool running = true)
+        public Application(bool is_3d, bool running = true)
         {
             _running = running;
+            _is_3d = is_3d;
             if (!_running) return;
 
             Window window = Window.Instance;
+            window.Is3D = _is_3d;
             window.init_sdl();
-            window.create_window(null, new Rect(250, 250, 500, 500), 0);
+            if (_is_3d) window.create_window(null, new Rect(250, 250, 500, 500), (uint)SDL.SDL_WindowFlags.SDL_WINDOW_OPENGL);
+            else window.create_window(null, new Rect(250, 250, 500, 500), 0);
 
             Renderer renderer = Renderer.Instance;
+            renderer.Is3D = _is_3d;
             renderer.create_renderer(2);
         }
 
@@ -88,13 +93,31 @@ namespace CS_SDL_test.Lib.API
                     last_tick_time = DateTimeOffset.Now.ToUnixTimeMilliseconds() + FRAME_DELAY;
                 }
 
-                renderer.set_render_draw_colour(Colour.black());
-                renderer.set_render_clear();
+                if (!_is_3d)
+                {
+                    renderer.set_render_draw_colour();
+                    renderer.set_render_clear();
 
-                if (ViewManager.CurrentView != null)
-                    ViewManager.CurrentView.render_view(ViewManager.get_active_camera());
+                    if (ViewManager.CurrentView != null)
+                        ViewManager.CurrentView.render_view(ViewManager.get_active_camera());
 
-                renderer.set_render_present();
+                    renderer.set_render_present();
+                }
+                else
+                {
+                    if (Input.get_key_down(Input.KeyCode.LEFT_ARROW)) renderer.RotY -= 5;
+                    if (Input.get_key_down(Input.KeyCode.RIGHT_ARROW)) renderer.RotY += 5;
+                    if (Input.get_key_down(Input.KeyCode.UP_ARROW)) renderer.RotX += 5;
+                    if (Input.get_key_down(Input.KeyCode.DOWN_ARROW)) renderer.RotX -= 5;
+
+                    renderer.set_render_draw_colour();
+                    renderer.set_render_clear();
+
+                    renderer.render_cuboid();
+                    renderer.set_render_present();
+                    string err = renderer.get_error();
+                    if (err != "") Debug.log_error(err);
+                }
 
                 uint end_ticks = Window.Ticks;
                 float frame_time = (end_ticks - start_ticks) / 1000.0f;

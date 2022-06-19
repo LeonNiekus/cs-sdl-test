@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib", "Lib.csproj", "{74511D57-BFFE-4370-AFAD-54579CD60A56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lib", "Lib.csproj", "{74511D57-BFFE-4370-AFAD-54579CD60A56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "..\API\API.csproj", "{F7D090BA-9990-4605-B7D4-7A3D8A8016DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "..\API\API.csproj", "{F7D090BA-9990-4605-B7D4-7A3D8A8016DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game", "..\Game\Game.csproj", "{0773A3E9-AFBA-4F0B-A94F-DC40E41660BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Game", "..\Game\Game.csproj", "{0773A3E9-AFBA-4F0B-A94F-DC40E41660BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

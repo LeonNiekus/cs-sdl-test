@@ -11,9 +11,9 @@ namespace API
     {
         internal Application _app;
 
-        public API_Application()
+        public API_Application(bool is_3d)
         {
-            _app = new Application();
+            _app = new Application(is_3d);
         }
 
         public void request_close()
