@@ -16,7 +16,7 @@ namespace Game
 
         static void Main(string[] args)
         {
-            _game = new TestGame(new API_Application(true));
+            _game = new TestGame(new API_Application(false));
 
             WindowHandle window = WindowHandle.Instance;
             window.set_size(new Rect(1080, 720));

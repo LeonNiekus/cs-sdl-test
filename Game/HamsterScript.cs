@@ -34,20 +34,36 @@ namespace Game
                 case Input.KeyCode.S:
                     move_hamster(dy: 3);
                     break;
-                case Input.KeyCode.ESCAPE:
-                    Game_EntryPoint.get_game().Application.request_close();
+                case Input.KeyCode.O:
+                    ViewManager.get_active_camera().Target = Parent;
+                    break;
+                case Input.KeyCode.R:
+                    var pb = Parent.get_component<PhysicsBody>();
+                    if (pb != null) pb.Velocity = new(0, 0);
+                    Parent.Transform = new(0, 0);
                     break;
             }
         }
 
         public override void on_create()
         {
-            Debug.log("HamsterScript created!");
-            Debug.log_error(new Point3D(1, 1).x);
+            Debug.log("W|A|S|D = hamster movement (up/left/down/right)");
+            Debug.log("O = set hamster as camera target");
+            Debug.log("R = reset hamster velocity and position");
         }
 
         public override void on_frame_tick()
         {
+            //var phys_body = Parent.get_component<PhysicsBody>();
+
+           // if (phys_body != null)
+           // {
+           //     if (Parent.Transform.y < 0) phys_body.Velocity = new(0, 0);
+           //     if ((Parent.Transform.y + sprite_h) > ViewManager.CurrentView.Size.h) phys_body.Velocity = new(0, 0);
+           // }
+
+           // Debug.log_debug(Parent.Transform.x);
+
             //bounce();
         }
 
@@ -68,9 +84,15 @@ namespace Game
         private void move_hamster(int dx = 0, int dy = 0)
         {
             var phys_body = Parent.get_component<PhysicsBody>();
+            if (phys_body == null) return;
 
-            if (phys_body != null)
-                phys_body.add_force(new FloatContainer(dx, dy));
+            //if (dx < 0 && Parent.Transform.x <= 0) return;
+            //if (dx > 0 && (Parent.Transform.x + sprite_w) >= ViewManager.CurrentView.Size.w) return;
+
+            //if (dy < 0 && Parent.Transform.y <= 0) return;
+            //if (dy > 0 && (Parent.Transform.y + sprite_h) >= ViewManager.CurrentView.Size.h) return;
+
+            phys_body.add_force(new FloatContainer(dx, dy));
         }
     }
 }

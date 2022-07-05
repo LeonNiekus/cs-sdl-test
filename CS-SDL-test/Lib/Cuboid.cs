@@ -81,7 +81,7 @@ namespace CS_SDL_test.Lib
         public double w_axis_center, h_axis_center, l_axis_center;
         public DoublePoint3D total_center;
 
-        public FCuboid(Point3D position, float w, float h, float l)
+        public FCuboid(FPoint3D position, float w, float h, float l)
         {
             x = position.x;
             y = position.y;
@@ -96,7 +96,7 @@ namespace CS_SDL_test.Lib
             total_center = new DoublePoint3D(w_axis_center, h_axis_center, l_axis_center);
         }
 
-        public FCuboid(Point3D position, float size)
+        public FCuboid(FPoint3D position, float size)
         {
             x = position.x;
             y = position.y;

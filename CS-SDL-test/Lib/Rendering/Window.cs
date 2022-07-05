@@ -161,5 +161,11 @@ namespace CS_SDL_test.Lib.Rendering
             SDL.SDL_GetWindowSize(_pWindow, out int w, out _);
             return w;
         }
+
+        public void set_mouse_relative_mode(bool flag)
+        {
+            SDL.SDL_bool s_in = flag ? SDL.SDL_bool.SDL_TRUE : SDL.SDL_bool.SDL_FALSE;
+            SDL.SDL_SetRelativeMouseMode(s_in);
+        }
     }
 }

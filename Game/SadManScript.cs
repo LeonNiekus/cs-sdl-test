@@ -18,6 +18,21 @@ namespace Game
             this.sprite_h = sprite_h;
         }
 
+        public override void on_key_pressed(Events.KeyEvent e)
+        {
+            switch (e.key)
+            {
+                case Input.KeyCode.P:
+                    ViewManager.get_active_camera().Target = Parent;
+                    break;
+            }
+        }
+
+        public override void on_create()
+        {
+            Debug.log("P = set sad man as camera target");
+        }
+
         public override void on_frame_tick()
         {
             bounce();

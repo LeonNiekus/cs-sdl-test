@@ -37,6 +37,36 @@ namespace CS_OpenGL
             {
                 return new(GLfclamp.f(0.0f), GLfclamp.f(0.0f), GLfclamp.f(0.0f));
             }
+
+            public static GLcolour white()
+            {
+                return new(GLfclamp.f(1.0f), GLfclamp.f(1.0f), GLfclamp.f(1.0f));
+            }
+
+            public static GLcolour red()
+            {
+                return new(GLfclamp.f(1.0f), GLfclamp.f(0.0f), GLfclamp.f(0.0f));
+            }
+
+            public static GLcolour green()
+            {
+                return new(GLfclamp.f(0.0f), GLfclamp.f(1.0f), GLfclamp.f(0.0f));
+            }
+
+            public static GLcolour blue()
+            {
+                return new(GLfclamp.f(0.0f), GLfclamp.f(0.0f), GLfclamp.f(1.0f));
+            }
+
+            public static GLcolour yellow()
+            {
+                return new(GLfclamp.f(1.0f), GLfclamp.f(1.0f), GLfclamp.f(0.0f));
+            }
+
+            public static GLcolour purple()
+            {
+                return new(GLfclamp.f(1.0f), GLfclamp.f(0.0f), GLfclamp.f(1.0f));
+            }
         }
 
         public struct GLfclamp

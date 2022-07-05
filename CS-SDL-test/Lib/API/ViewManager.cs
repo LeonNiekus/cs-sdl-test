@@ -44,7 +44,7 @@ namespace CS_SDL_test.Lib.API
             {
                 int window_w = Math.Min(Window.Instance.get_width(), view_size.w);
                 int window_h = Math.Min(Window.Instance.get_height(), view_size.h);
-                var camera = Resources.create_camera("main_camera", Colour.black(), window_w, window_h);
+                var camera = Resources.create_camera("main_camera", window_w, window_h);
                 camera.set_active(true);
 
                 view.on_create();

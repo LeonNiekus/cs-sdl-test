@@ -27,9 +27,10 @@ namespace CS_SDL_test.Lib.API
             return entity;
         }
 
-        public static Camera create_camera(string name, Colour background_colour, float aspect_w, float aspect_h)
+        public static Camera create_camera(string name, int aspect_w, int aspect_h)
         {
-            Camera camera = new(name, background_colour, aspect_w, aspect_h);
+            Camera camera = new(name);
+            camera.set_scene_size(aspect_w, aspect_h);
             add_entity(camera);
             return camera;
         }
